@@ -2,19 +2,19 @@ type Opts =
     | string
     | {
           trim?: boolean;
-          replacement?: string;
-          lowercase?: boolean;
+          replace?: string;
+          lower?: boolean;
       };
 
 export default function slugizer(str: string, opts?: Opts) {
     const defaultOpts: Opts = {
         trim: true,
-        replacement: "-",
-        lowercase: true,
+        replace: "-",
+        lower: true,
     };
 
     if (typeof opts === "string") {
-        opts = { ...defaultOpts, replacement: opts };
+        opts = { ...defaultOpts, replace: opts };
     } else {
         opts = { ...defaultOpts, ...opts };
     }
@@ -23,9 +23,9 @@ export default function slugizer(str: string, opts?: Opts) {
         str = str.trim();
     }
 
-    let slug = str.replace(/[^a-zA-Z0-9]/g, opts.replacement as string);
+    let slug = str.replace(/[^a-zA-Z0-9]/g, opts.replace as string);
 
-    if (opts.lowercase) {
+    if (opts.lower) {
         slug = slug.toLowerCase();
     }
 
